@@ -1,0 +1,421 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: whitesmoke;
+    color: #333;
+}
+
+.dashboard-container {
+    display: flex;
+}
+.hero {
+    background: url('./imgz/pexels-quang-nguyen-vinh-222549-6136357.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 50px 20px;
+    color: white;
+    text-align: center;
+    height: 98vh;
+}
+
+.hero-content {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 30%;
+    font-weight: 600;
+}
+
+.hero .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.sidemenu {
+    width: 250px;
+    background-color:lightgreen;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    height: 100vh;
+    list-style-type: none;
+}
+.sidemenu ul.list {
+    list-style-type: none; /* Removes the bullet points */
+    padding: 0; /* Removes default padding */
+    margin: 0; /* Removes default margin */
+}
+
+.sidemenu ul.list li {
+    margin-bottom: 10px; /* Adds spacing between list items */
+}
+
+.sidemenu ul.list a {
+    text-decoration: none; /* Removes underline from links */
+    color: black; /* Sets the text color */
+    font-weight: bold; /* Makes the text bold */
+}
+
+.sidemenu ul.list a:hover {
+    color: green; /* Changes text color on hover */
+}
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+.container.sidemenu .list{
+    list-style-type: none;
+}
+/* styles for about*/
+/* Consolidated body styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4; /* Light background for contrast */
+  color: #333; /* Text color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container2 {
+  max-width: 400px; /* Set the maximum width of the frame */
+  margin: 50px auto; /* Center the frame horizontally and add vertical spacing */
+  padding: 20px; /* Add padding inside the frame */
+  background-color: #fff; /* White background for the frame */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  font-size: 16px;
+}
+
+h1 {
+  text-align: center; /* Center-align the headings */
+  margin-bottom: 20px; /* Add spacing below headings */
+  font-weight: bold;
+}
+
+p {
+  line-height: 1.6; /* Improve readability with line spacing */
+  margin-bottom: 20px; /* Add spacing below paragraphs */
+  font-weight: bold;
+}
+/* Consolidated universal styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6; /* Improve readability with line spacing */
+}
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  body {
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .login-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  input {
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+  }
+  
+  .btn {
+    background-color: #4a90e2;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn:hover {
+    background-color: #3a7bc8;
+  }
+
+  .forgot-password {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.forgot-password a {
+    color: green;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+  
+  /* Mobile responsiveness */
+  @media (max-width: 480px) {
+    .login-container {
+      padding: 20px;
+      width: 90%;
+    }
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  body {
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+  }
+  
+  .form-section {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #2c5e1a;
+    margin-bottom: 25px;
+    font-size: 28px;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+  }
+  
+  h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: #4caf50;
+    border-radius: 2px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-top: 16px;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #555;
+  }
+  
+  input {
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: #4caf50;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+  }
+  
+  .btn {
+    margin-top: 24px;
+    padding: 14px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .btn:hover {
+    background-color: #388e3c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn:active {
+    transform: translateY(0);
+  }
+  
+  /* Add responsiveness */
+  @media (max-width: 650px) {
+    .form-section {
+      padding: 20px;
+      margin: 20px auto;
+    }
+    
+    h2 {
+      font-size: 24px;
+    }
+    
+    input, .btn {
+      padding: 10px 14px;
+    }
+  }
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.main-content header {
+    margin-bottom: 20px;
+}
+
+.main-content header h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.cards {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    text-align: center;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.actions input {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th,
+table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+table th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+.btn-edit {
+    background-color: #ffc107;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
