@@ -60,7 +60,7 @@ if (isset($_GET['delete_farmer'])) {
     <section class="dashboard-container">
         <aside class="side-menu">
             <div class="logo">
-                <img src="../imgz/logo.png" alt="Keginga Tea Logo"> <!-- Updated path -->
+                <img src="imgz/user.png" alt="Keginga Tea Logo"> <!-- Updated path -->
             </div>
             <nav>
                 <ul>
