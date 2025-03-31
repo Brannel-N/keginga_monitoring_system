@@ -9,10 +9,13 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <!-- Tailwind CSS Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script>
@@ -24,6 +27,7 @@
         }
     </script>
 </head>
+
 <body class="bg-gray-100">
     <div class="flex h-screen">
         <!-- Sidebar -->
@@ -38,7 +42,6 @@
             <!-- Main Section -->
             <div class="flex-1 p-6">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Card 1: Number of Farmers -->
                     <div class="bg-white shadow rounded-lg p-6">
                         <div class="flex items-center">
                             <div class="text-blue-500 text-4xl">
@@ -50,8 +53,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Card 2: Total Kilograms of Tea -->
                     <div class="bg-white shadow rounded-lg p-6">
                         <div class="flex items-center">
                             <div class="text-green-500 text-4xl">
@@ -63,8 +64,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Card 3: Total Transactions -->
                     <div class="bg-white shadow rounded-lg p-6">
                         <div class="flex items-center">
                             <div class="text-yellow-500 text-4xl">
@@ -117,4 +116,5 @@
         </div>
     </div>
 </body>
+
 </html>
