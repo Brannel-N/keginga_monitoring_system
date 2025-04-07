@@ -6,6 +6,7 @@ class User
 
     public function __construct($connection)
     {
+        echo "User model initialized.<br>";
         $this->conn = $connection;
 
         if ($this->conn->connect_error) {
@@ -19,6 +20,7 @@ class User
     // Method to create the users table
     public function createTable()
     {
+        echo "Creating users table...<br>";
         $sql = "CREATE TABLE IF NOT EXISTS users (
             userId INT AUTO_INCREMENT PRIMARY KEY,
             fullName VARCHAR(255) NOT NULL,

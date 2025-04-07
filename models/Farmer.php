@@ -11,6 +11,8 @@ class Farmer
     {
         $this->conn = $connection;
 
+        echo "Farmer model initialized.<br>";
+
         if ($this->conn->connect_error) {
             die("Connection failed: " . $this->conn->connect_error);
         }
@@ -25,6 +27,8 @@ class Farmer
     // Method to create the farmers table and ensure the users table exists
     public function createTable()
     {
+        echo "Creating farmers table...<br>";
+        
         // Ensure the users table exists
         $this->userModel->createTable();
 
@@ -40,9 +44,9 @@ class Farmer
         )";
 
         if ($this->conn->query($sql) === TRUE) {
-            echo "Table 'farmers' created successfully.";
+            echo "Table 'farmers' created successfully.<br>";
         } else {
-            echo "Error creating table: " . $this->conn->error;
+            echo "Error creating table: " . $this->conn->error . "<br>";
         }
     }
 

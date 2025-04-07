@@ -34,8 +34,8 @@
             <!-- Main Section -->
             <div class="flex-1 p-6">
                 <!-- Search Bar -->
-                <div class="mb-6">
-                    <form method="GET" action="">
+                <div class="mb-6 flex items-center">
+                    <form method="GET" action="" class="flex-1">
                         <div class="flex items-center">
                             <input type="text" name="search" placeholder="Search by Farmer ID or Name"
                                 class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring focus:ring-blue-300"
@@ -46,6 +46,10 @@
                             </button>
                         </div>
                     </form>
+                    <a href="create_farmer.php"
+                        class="ml-4 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 focus:outline-none">
+                        Add Farmer
+                    </a>
                 </div>
 
                 <!-- Farmers Table -->
