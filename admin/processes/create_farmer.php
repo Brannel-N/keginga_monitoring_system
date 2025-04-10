@@ -1,7 +1,6 @@
 <?php
 // Include the database connection
 require_once '../../config/db.php';
-require_once '../../models/Farmer.php';
 
 session_start();
 
@@ -18,25 +17,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validate required fields
     if (empty($fullName) || empty($email) || empty($phoneNumber) || empty($location)) {
         $_SESSION['error'] = 'All fields are required.';
-        exit;
+        exit();
     }
 
-    echo "Attempting to create farmer with the following details:<br>";
+    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+    $stmt = $conn->prepare("INSERT INTO users (fullName, email, password, phoneNumber, isActive, isAdmin) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssii", $fullName, $email, $hashedPassword, $phoneNumber, $isActive, $isAdmin);
 
-    // Create a new Farmer instance
-    $farmer = new Farmer($conn);
-    
-    // check if farmer instance is created
-    if (!$farmer) {
-        echo json_encode(['status' => 'error', 'message' => 'Failed to create farmer instance.']);
-        exit;
-    }
-    
-    // Save the farmer to the database
-    if ($farmer->createFarmer($fullName, $email, $phoneNumber, "12345678", $location)) {
-        echo json_encode(['status' => 'success', 'message' => 'Farmer created successfully.']);
+    if ($stmt->execute()) {
+        $userId = $stmt->insert_id; // Get the last inserted ID
+
+        if ($userId) {
+            $stmt = $conn->prepare("INSERT INTO farmers (userId, location) VALUES (?, ?)");
+            $stmt->bind_param("is", $userId, $location);
+
+            if ($stmt->execute()) {
+                $farmerId = $stmt->insert_id; // Get the last inserted ID
+                header("Location: ../farmers.php");
+                $stmt->close();
+            } else {
+                $error = $stmt->error;
+               $_SESSION['error'] = "Error creating farmer record";
+               header("Location: ../create_farmer.php");
+               $stmt->close();  
+               exit(); 
+            }
+        } else {
+            $error = $stmt->error;
+            $_SESSION['error'] = "Error creating user record";
+            echo "Error creating user: " . $error;
+            header("Location: ../create_farmer.php");
+            $stmt->close();
+            exit();
+        }
     } else {
-        echo json_encode(['status' => 'error', 'message' => 'Failed to create farmer.']);
+        $error = $stmt->error;
+        echo "Error creating user: " . $error;
+        $_SESSION['error'] = "Error creating farmer record";
+        header("Location: ../create_farmer.php");
+        $stmt->close();
+        exit();
     }
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);

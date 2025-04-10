@@ -1,10 +1,32 @@
 <?php
+// Include database configuration
+require_once '../config/db.php';
+
 // Start session to access user data
-// session_start();
-// if (!isset($_SESSION['user'])) {
-//     header("Location: login.php");
-//     exit();
-// }
+session_start();
+if (!isset($_SESSION['userId'])) {
+    header("Location: login.php");
+    exit();
+}
+
+// Fetch farmers from the database
+$search = isset($_GET['search']) ? strtolower(trim($_GET['search'])) : '';
+$query = "SELECT f.farmerId, u.fullName, u.email, u.phoneNumber, f.location, f.totalQtySold, f.totalOutstandingBalance, f.totalAmountEarned, f.totalAmountPaid 
+          FROM farmers f 
+          INNER JOIN users u ON f.userId = u.userId";
+if (!empty($search)) {
+    $query .= " WHERE LOWER(f.farmerId) LIKE ? OR LOWER(u.fullName) LIKE ?";
+}
+
+$stmt = $conn->prepare($query);
+if (!empty($search)) {
+    $searchParam = "%$search%";
+    $stmt->bind_param("ss", $searchParam, $searchParam);
+}
+$stmt->execute();
+$result = $stmt->get_result();
+$farmers = $result->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -62,40 +84,39 @@
                                     <th class="border border-gray-300 px-4 py-2 text-left">Farmer ID</th>
                                     <th class="border border-gray-300 px-4 py-2 text-left">Full Name</th>
                                     <th class="border border-gray-300 px-4 py-2 text-left">Email</th>
-                                    <th class="border border-gray-300 px-4 py-2 text-left">Contact</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">Phone Number</th>
                                     <th class="border border-gray-300 px-4 py-2 text-left">Location</th>
-                                    <th class="border border-gray-300 px-4 py-2 text-left">Joined</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">Total Qty Sold</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">Outstanding Balance</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">Total Amount Earned</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">Total Amount Paid</th>
                                     <th class="border border-gray-300 px-4 py-2 text-left">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                // Sample data for demonstration
-                                $farmers = [
-                                    ['id' => 'F001', 'name' => 'John Doe', 'phone' => '123-456-7890', 'location' => 'Nairobi'],
-                                    ['id' => 'F002', 'name' => 'Jane Smith', 'phone' => '987-654-3210', 'location' => 'Mombasa'],
-                                    ['id' => 'F003', 'name' => 'Michael Brown', 'phone' => '555-555-5555', 'location' => 'Kisumu'],
-                                ];
-
-                                // Filter farmers based on search query
-                                $search = isset($_GET['search']) ? strtolower(trim($_GET['search'])) : '';
-                                $filteredFarmers = array_filter($farmers, function ($farmer) use ($search) {
-                                    return empty($search) || strpos(strtolower($farmer['id']), $search) !== false || strpos(strtolower($farmer['name']), $search) !== false;
-                                });
-
                                 // Display farmers
-                                if (!empty($filteredFarmers)) {
-                                    foreach ($filteredFarmers as $farmer) {
+                                if (!empty($farmers)) {
+                                    foreach ($farmers as $farmer) {
                                         echo "<tr>
-                                            <td class='border border-gray-300 px-4 py-2'>{$farmer['id']}</td>
-                                            <td class='border border-gray-300 px-4 py-2'>{$farmer['name']}</td>
-                                            <td class='border border-gray-300 px-4 py-2'>{$farmer['phone']}</td>
+                                            <td class='border border-gray-300 px-4 py-2'>{$farmer['farmerId']}</td>
+                                            <td class='border border-gray-300 px-4 py-2'>{$farmer['fullName']}</td>
+                                            <td class='border border-gray-300 px-4 py-2'>{$farmer['email']}</td>
+                                            <td class='border border-gray-300 px-4 py-2'>{$farmer['phoneNumber']}</td>
                                             <td class='border border-gray-300 px-4 py-2'>{$farmer['location']}</td>
+                                            <td class='border border-gray-300 px-4 py-2'>{$farmer['totalQtySold']}</td>
+                                            <td class='border border-gray-300 px-4 py-2'>{$farmer['totalOutstandingBalance']}</td>
+                                            <td class='border border-gray-300 px-4 py-2'>{$farmer['totalAmountEarned']}</td>
+                                            <td class='border border-gray-300 px-4 py-2'>{$farmer['totalAmountPaid']}</td>
+                                            <td class='border border-gray-300 px-4 py-2'>
+                                                <a href='farmer_details.php?farmerId={$farmer['farmerId']}' 
+                                                   class='text-blue-500 hover:underline'>View More</a>
+                                            </td>
                                         </tr>";
                                     }
                                 } else {
                                     echo "<tr>
-                                        <td colspan='4' class='border border-gray-300 px-4 py-2 text-center text-gray-500'>No farmers found</td>
+                                        <td colspan='10' class='border border-gray-300 px-4 py-2 text-center text-gray-500'>No farmers found</td>
                                     </tr>";
                                 }
                                 ?>
