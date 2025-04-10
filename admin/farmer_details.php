@@ -72,7 +72,7 @@
                         </div>
                         <div>
                             <h3 class="text-lg font-semibold">Total Earnings</h3>
-                            <p class="text-2xl font-bold">$0.00</p>
+                            <p class="text-2xl font-bold">KES 0.00</p>
                         </div>
                     </div>
 
@@ -83,7 +83,7 @@
                         </div>
                         <div>
                             <h3 class="text-lg font-semibold">Total Outstanding Balance</h3>
-                            <p class="text-2xl font-bold">$0.00</p>
+                            <p class="text-2xl font-bold">KES 0.00</p>
                         </div>
                     </div>
                 </div>
@@ -114,9 +114,9 @@
                             <div class="bg-white shadow rounded-lg p-4 flex justify-between items-center">
                                 <div>
                                     <p class="text-gray-600">Date: <span class="font-semibold">2023-01-01</span></p>
-                                    <p class="text-gray-600">Amount Paid: <span class="font-semibold">$100.00</span></p>
+                                    <p class="text-gray-600">Amount Paid: <span class="font-semibold">KES 100.00</span></p>
                                     <p class="text-gray-600">Outstanding Balance: <span
-                                            class="font-semibold">$50.00</span>
+                                            class="font-semibold">KES 50.00</span>
                                     </p>
                                 </div>
                             </div>
