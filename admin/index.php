@@ -1,10 +1,58 @@
 <?php
 // Start session to access user data
-// session_start();
-// if (!isset($_SESSION['user'])) {
-//     header("Location: login.php");
-//     exit();
-// }
+session_start();
+if (!isset($_SESSION['userId'])) {
+    header("Location: login.php");
+    exit();
+}
+
+// Include database connection
+require_once '../config/db.php';
+
+// Fetch stats from the database
+$totalFarmers = 0;
+$totalKilograms = 0;
+$totalTransactions = 0;
+$recentTransactions = [];
+
+try {
+    // Prepare and execute query to get total number of farmers
+    $query = "SELECT COUNT(*) AS totalFarmers FROM farmers";
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $totalFarmers = $result->fetch_assoc()['totalFarmers'];
+
+    // Prepare and execute query to get total kilograms of tea
+    $query = "SELECT SUM(quantity) AS totalKilograms FROM sale_records";
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $totalKilograms = $result->fetch_assoc()['totalKilograms'];
+
+    // Prepare and execute query to get total transactions
+    $query = "SELECT COUNT(*) AS totalTransactions FROM sale_records";
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $totalTransactions = $result->fetch_assoc()['totalTransactions'];
+
+    // Prepare and execute query to get the 5 most recent transactions
+    $query = "SELECT 
+            sale_records.recordId AS id, 
+            sale_records.date, 
+            sale_records.quantity,
+            users.fullName AS farmer_name
+          FROM sale_records 
+          JOIN farmers ON sale_records.farmerId = farmers.farmerId 
+          JOIN users ON farmers.userId = users.userId ORDER BY `date` DESC LIMIT 5";
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $recentTransactions = $result->fetch_all(MYSQLI_ASSOC);
+} catch (mysqli_sql_exception $e) {
+    die("Database error: " . $e->getMessage());
+}
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +97,7 @@
                             </div>
                             <div class="ml-4">
                                 <h2 class="text-lg font-bold">Number of Farmers</h2>
-                                <p class="text-gray-600 text-xl">120</p>
+                                <p class="text-gray-600 text-xl"><?php echo $totalFarmers; ?></p>
                             </div>
                         </div>
                     </div>
@@ -60,7 +108,7 @@
                             </div>
                             <div class="ml-4">
                                 <h2 class="text-lg font-bold">Total Kilograms of Tea</h2>
-                                <p class="text-gray-600 text-xl">15,000 kg</p>
+                                <p class="text-gray-600 text-xl"><?php echo number_format($totalKilograms); ?> kg</p>
                             </div>
                         </div>
                     </div>
@@ -71,12 +119,11 @@
                             </div>
                             <div class="ml-4">
                                 <h2 class="text-lg font-bold">Total Transactions</h2>
-                                <p class="text-gray-600 text-xl">350</p>
+                                <p class="text-gray-600 text-xl"><?php echo $totalTransactions; ?></p>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <!-- Recent Transactions Table -->
                 <div class="mt-8 bg-white shadow rounded-lg p-6">
                     <h2 class="text-xl font-bold mb-4">Recent Tea Sale Transactions</h2>
@@ -89,21 +136,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="border border-gray-300 px-4 py-2">John Doe</td>
-                                <td class="border border-gray-300 px-4 py-2">2023-03-01 10:30 AM</td>
-                                <td class="border border-gray-300 px-4 py-2">50 kg</td>
-                            </tr>
-                            <tr>
-                                <td class="border border-gray-300 px-4 py-2">Jane Smith</td>
-                                <td class="border border-gray-300 px-4 py-2">2023-03-01 11:00 AM</td>
-                                <td class="border border-gray-300 px-4 py-2">30 kg</td>
-                            </tr>
-                            <tr>
-                                <td class="border border-gray-300 px-4 py-2">Michael Brown</td>
-                                <td class="border border-gray-300 px-4 py-2">2023-03-01 11:30 AM</td>
-                                <td class="border border-gray-300 px-4 py-2">40 kg</td>
-                            </tr>
+                            <?php foreach ($recentTransactions as $transaction): ?>
+                                <tr>
+                                    <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($transaction['farmer_name']); ?></td>
+                                    <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($transaction['date']); ?></td>
+                                    <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($transaction['quantity']); ?> kg</td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>

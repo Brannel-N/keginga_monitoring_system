@@ -1,15 +1,33 @@
 <?php
 // Start session to access user data
-// session_start();
-// if (!isset($_SESSION['user'])) {
-//     header("Location: login.php");
-//     exit();
-// }
-?>
+session_start();
+if (!isset($_SESSION['userId'])) {
+    header("Location: login.php");
+    exit();
+}
 
+// Include database connection
+require_once "../config/db.php";
+
+
+// Fetch sales data from the database
+$query = "SELECT 
+            sale_records.recordId AS id, 
+            sale_records.date, 
+            sale_records.farmerId, 
+            sale_records.quantity, 
+            users.fullName AS farmer_name
+          FROM sale_records 
+          JOIN farmers ON sale_records.farmerId = farmers.farmerId 
+          JOIN users ON farmers.userId = users.userId";
+$result = $conn->query($query);
+
+if (!$result) {
+    die("Error fetching sales data: " . $conn->error);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +37,6 @@
     <!-- Tailwind CSS Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-
 <body class="bg-gray-100">
     <div class="flex h-screen">
         <!-- Sidebar -->
@@ -48,38 +65,21 @@
                                     <th class="border border-gray-300 px-4 py-2 text-left">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <?php
-                                // Sample data for demonstration
-                                $farmers = [
-                                    ['id' => 'F001', 'name' => 'John Doe', 'phone' => '123-456-7890', 'location' => 'Nairobi'],
-                                    ['id' => 'F002', 'name' => 'Jane Smith', 'phone' => '987-654-3210', 'location' => 'Mombasa'],
-                                    ['id' => 'F003', 'name' => 'Michael Brown', 'phone' => '555-555-5555', 'location' => 'Kisumu'],
-                                ];
-
-                                // Filter farmers based on search query
-                                $search = isset($_GET['search']) ? strtolower(trim($_GET['search'])) : '';
-                                $filteredFarmers = array_filter($farmers, function ($farmer) use ($search) {
-                                    return empty($search) || strpos(strtolower($farmer['id']), $search) !== false || strpos(strtolower($farmer['name']), $search) !== false;
-                                });
-
-                                // Display farmers
-                                if (!empty($filteredFarmers)) {
-                                    foreach ($filteredFarmers as $farmer) {
-                                        echo "<tr>
-                                            <td class='border border-gray-300 px-4 py-2'>{$farmer['id']}</td>
-                                            <td class='border border-gray-300 px-4 py-2'>{$farmer['name']}</td>
-                                            <td class='border border-gray-300 px-4 py-2'>{$farmer['phone']}</td>
-                                            <td class='border border-gray-300 px-4 py-2'>{$farmer['location']}</td>
-                                        </tr>";
-                                    }
-                                } else {
-                                    echo "<tr>
-                                        <td colspan='4' class='border border-gray-300 px-4 py-2 text-center text-gray-500'>No farmers found</td>
-                                    </tr>";
-                                }
-                                ?>
-                            </tbody>
+                        <tbody>
+                            <?php while ($row = $result->fetch_assoc()): ?>
+                                <tr>
+                                    <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($row['id']); ?></td>
+                                    <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($row['date']); ?></td>
+                                    <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($row['farmerId']); ?></td>
+                                    <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($row['farmer_name']); ?></td>
+                                    <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($row['quantity']); ?></td>
+                                    <td class="border border-gray-300 px-4 py-2">
+                                        <a href="edit_sale.php?id=<?php echo urlencode($row['id']); ?>" class="text-blue-500 hover:underline">Edit</a> |
+                                        <a href="delete_sale.php?id=<?php echo urlencode($row['id']); ?>" class="text-red-500 hover:underline" onclick="return confirm('Are you sure you want to delete this sale?');">Delete</a>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody></tr>
                         </table>
                     </div>
                 </div>

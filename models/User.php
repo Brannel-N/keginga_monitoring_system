@@ -6,7 +6,6 @@ class User
 
     public function __construct($connection)
     {
-        echo "User model initialized.<br>";
         $this->conn = $connection;
 
         if ($this->conn->connect_error) {
@@ -14,7 +13,7 @@ class User
         }
 
         // create table
-        $this->createTable();
+        // $this->createTable();
     }
 
     // Method to create the users table
@@ -42,6 +41,7 @@ class User
     // Create a new user
     public function createUser($fullName, $email, $password, $phoneNumber, $isActive = 1, $isAdmin = 0)
     {
+        echo "Creating user...<br>";
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         $stmt = $this->conn->prepare("INSERT INTO users (fullName, email, password, phoneNumber, isActive, isAdmin) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("ssssii", $fullName, $email, $hashedPassword, $phoneNumber, $isActive, $isAdmin);
@@ -52,8 +52,11 @@ class User
             return $userId;
         } else {
             $error = $stmt->error;
+            echo "Error creating user: " . $error;
+            // Check for duplicate email
             $stmt->close();
-            throw new Exception("Error creating user: " . $error);
+            return null;
+
         }
     }
 

@@ -1,10 +1,10 @@
 <?php
 // Start session to access user data
 session_start();
-// if (!isset($_SESSION['user'])) {
-//     header("Location: login.php");
-//     exit();
-// }
+if (!isset($_SESSION['userId'])) {
+    header("Location: login.php");
+    exit();
+}
 $error = isset($_SESSION['error']) ? $_SESSION['error'] : '';
 if (isset($_SESSION['error'])) {
     unset($_SESSION['error']);
