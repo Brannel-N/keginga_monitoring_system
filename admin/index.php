@@ -2,7 +2,7 @@
 // Start session to access user data
 session_start();
 if (!isset($_SESSION['userId'])) {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 
@@ -88,7 +88,7 @@ try {
             </div>
 
             <!-- Main Section -->
-            <div class="flex-1 p-6">
+            <div class="flex-1 p-2 md:p-6">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-white shadow rounded-lg p-6">
                         <div class="flex items-center">

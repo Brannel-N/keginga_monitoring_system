@@ -9,3 +9,6 @@ CREATE TABLE USERS(
     PRIMARY KEY(user_id)
     
 );
+
+ALTER TABLE users 
+MODIFY COLUMN password VARCHAR(255) NULL;

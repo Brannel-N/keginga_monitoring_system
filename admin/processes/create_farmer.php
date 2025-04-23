@@ -20,9 +20,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-    $stmt = $conn->prepare("INSERT INTO users (fullName, email, password, phoneNumber, isActive, isAdmin) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssii", $fullName, $email, $hashedPassword, $phoneNumber, $isActive, $isAdmin);
+    $isActive = 1; // Assuming the user is active by default
+    $isAdmin = 0; // Assuming the user is not an admin by default
+    // Check if the email already exists
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        $_SESSION['error'] = 'Email already exists.';
+        header("Location: ../create_farmer.php");
+        exit();
+    }
+    // Check if the phone number already exists
+    $stmt = $conn->prepare("SELECT * FROM users WHERE phoneNumber = ?");
+    $stmt->bind_param("s", $phoneNumber);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        $_SESSION['error'] = 'Phone number already exists.';
+        header("Location: ../create_farmer.php");
+        exit();
+    }
+
+    $stmt = $conn->prepare("INSERT INTO users (fullName, email, phoneNumber, isActive, isAdmin) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssii", $fullName, $email, $phoneNumber, $isActive, $isAdmin);
 
     if ($stmt->execute()) {
         $userId = $stmt->insert_id; // Get the last inserted ID
@@ -32,15 +54,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bind_param("is", $userId, $location);
 
             if ($stmt->execute()) {
-                $farmerId = $stmt->insert_id; // Get the last inserted ID
                 header("Location: ../farmers.php");
                 $stmt->close();
+                exit();
             } else {
                 $error = $stmt->error;
-               $_SESSION['error'] = "Error creating farmer record";
-               header("Location: ../create_farmer.php");
-               $stmt->close();  
-               exit(); 
+                $_SESSION['error'] = "Error creating farmer record";
+                header("Location: ../create_farmer.php");
+                $stmt->close();
+                exit();
             }
         } else {
             $error = $stmt->error;

@@ -2,7 +2,7 @@
 // Start session to access user data
 session_start();
 if (!isset($_SESSION['userId'])) {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 $error = isset($_SESSION['error']) ? $_SESSION['error'] : '';

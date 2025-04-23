@@ -45,3 +45,6 @@ CREATE TABLE IF NOT EXISTS payments (
             totalOutstandingBalance DECIMAL(10, 2) NOT NULL,
             FOREIGN KEY (farmerId) REFERENCES farmers(farmerId) ON DELETE CASCADE
         );
+
+ALTER TABLE users 
+MODIFY COLUMN password VARCHAR(255) NULL;

@@ -2,7 +2,7 @@
 // Start session to access user data
 session_start();
 if (!isset($_SESSION['userId'])) {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <!-- Main Section -->
-            <div class="w-full lg:w-1/3 p-6 mx-auto">
+            <div class="w-full lg:w-1/3 p-2 md:p-6 mx-auto">
                 <div class="bg-white shadow rounded-lg p-6">
                     <h2 class="text-xl font-bold mb-4">New Payment</h2>
 

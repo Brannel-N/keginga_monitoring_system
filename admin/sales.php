@@ -2,7 +2,7 @@
 // Start session to access user data
 session_start();
 if (!isset($_SESSION['userId'])) {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 
@@ -49,7 +49,7 @@ if (!$result) {
             </div>
 
             <!-- Main Section -->
-            <div class="flex-1 p-6">
+            <div class="flex-1 p-2 md:p-6">
                 <!-- Sales Table -->
                 <div class="bg-white shadow rounded-lg p-6">
                     <h2 class="text-xl font-bold mb-4">Sales History</h2>
@@ -62,7 +62,7 @@ if (!$result) {
                                     <th class="border border-gray-300 px-4 py-2 text-left">Farmer ID</th>
                                     <th class="border border-gray-300 px-4 py-2 text-left">Farmer Name</th>
                                     <th class="border border-gray-300 px-4 py-2 text-left">Quantity</th>
-                                    <th class="border border-gray-300 px-4 py-2 text-left">Actions</th>
+                                    <!-- <th class="border border-gray-300 px-4 py-2 text-left">Actions</th> -->
                                 </tr>
                             </thead>
                         <tbody>
@@ -73,10 +73,10 @@ if (!$result) {
                                     <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($row['farmerId']); ?></td>
                                     <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($row['farmer_name']); ?></td>
                                     <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($row['quantity']); ?></td>
-                                    <td class="border border-gray-300 px-4 py-2">
+                                    <!-- <td class="border border-gray-300 px-4 py-2">
                                         <a href="edit_sale.php?id=<?php echo urlencode($row['id']); ?>" class="text-blue-500 hover:underline">Edit</a> |
                                         <a href="delete_sale.php?id=<?php echo urlencode($row['id']); ?>" class="text-red-500 hover:underline" onclick="return confirm('Are you sure you want to delete this sale?');">Delete</a>
-                                    </td>
+                                    </td> -->
                                 </tr>
                             <?php endwhile; ?>
                         </tbody></tr>
