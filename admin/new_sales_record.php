@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $updateStmt->bind_param("dddi", $quantity, $quantity, $unitRate, $farmerId);
         if ($updateStmt->execute()) {
             $successMessage = "Sale record added and farmer data updated successfully!";
-            header("Location: ../sales_records.php?farmerId=$farmerId");
+            header("Location: ./sales.php?farmerId=$farmerId");
         } else {
             $errorMessage = "Failed to update farmer data. Please try again.";
         }
