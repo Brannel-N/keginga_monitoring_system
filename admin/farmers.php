@@ -5,7 +5,7 @@ require_once '../config/db.php';
 // Start session to access user data
 session_start();
 if (!isset($_SESSION['userId'])) {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 
@@ -43,7 +43,7 @@ $stmt->close();
 </head>
 
 <body class="bg-gray-100">
-    <div class="flex h-screen">
+    <div class="md:flex h-screen">
         <!-- Sidebar -->
         <?php include 'includes/sidebar.php'; ?>
         <!-- Main Content -->
@@ -54,22 +54,22 @@ $stmt->close();
             </div>
 
             <!-- Main Section -->
-            <div class="flex-1 p-6">
+            <div class="flex-1 p-2 md:p-6">
                 <!-- Search Bar -->
-                <div class="mb-6 flex items-center">
-                    <form method="GET" action="" class="flex-1">
-                        <div class="flex items-center">
+                <div class="mb-6 flex flex-col space-y-4 md:space-y-0 md:flex-row md:items-center">
+                    <form method="GET" action="" class="md:flex-1">
+                        <div class="w-full flex space-x-4 md:space-x-0 items-center">
                             <input type="text" name="search" placeholder="Search by Farmer ID or Name"
-                                class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                                class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring focus:ring-blue-300"
                                 value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
                             <button type="submit"
-                                class="ml-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none">
+                                class="md:ml-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none">
                                 Search
                             </button>
                         </div>
                     </form>
                     <a href="create_farmer.php"
-                        class="ml-4 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 focus:outline-none">
+                        class="md:ml-4 bg-green-500 text-white text-center px-4 py-2 rounded-lg hover:bg-green-600 focus:outline-none">
                         Add Farmer
                     </a>
                 </div>
@@ -78,27 +78,27 @@ $stmt->close();
                 <div class="bg-white shadow rounded-lg p-6">
                     <h2 class="text-xl font-bold mb-4">Farmers List</h2>
                     <div class="overflow-x-auto">
-                        <table class="min-w-full table-auto border-collapse border border-gray-200">
-                            <thead>
-                                <tr class="bg-gray-100">
-                                    <th class="border border-gray-300 px-4 py-2 text-left">Farmer ID</th>
-                                    <th class="border border-gray-300 px-4 py-2 text-left">Full Name</th>
-                                    <th class="border border-gray-300 px-4 py-2 text-left">Email</th>
-                                    <th class="border border-gray-300 px-4 py-2 text-left">Phone Number</th>
-                                    <th class="border border-gray-300 px-4 py-2 text-left">Location</th>
-                                    <th class="border border-gray-300 px-4 py-2 text-left">Total Qty Sold</th>
-                                    <th class="border border-gray-300 px-4 py-2 text-left">Outstanding Balance</th>
-                                    <th class="border border-gray-300 px-4 py-2 text-left">Total Amount Earned</th>
-                                    <th class="border border-gray-300 px-4 py-2 text-left">Total Amount Paid</th>
-                                    <th class="border border-gray-300 px-4 py-2 text-left">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                // Display farmers
-                                if (!empty($farmers)) {
-                                    foreach ($farmers as $farmer) {
-                                        echo "<tr>
+                        <table class="border-collapse border border-gray-200">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="border border-gray-300 px-4 py-2 text-left">Farmer ID</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left">Full Name</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left">Email</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left">Phone Number</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left">Location</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left">Total Qty Sold</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left">Outstanding Balance</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left">Total Amount Earned</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left">Total Amount Paid</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            // Display farmers
+                            if (!empty($farmers)) {
+                                foreach ($farmers as $farmer) {
+                                    echo "<tr>
                                             <td class='border border-gray-300 px-4 py-2'>{$farmer['farmerId']}</td>
                                             <td class='border border-gray-300 px-4 py-2'>{$farmer['fullName']}</td>
                                             <td class='border border-gray-300 px-4 py-2'>{$farmer['email']}</td>
@@ -113,15 +113,15 @@ $stmt->close();
                                                    class='text-blue-500 hover:underline'>View More</a>
                                             </td>
                                         </tr>";
-                                    }
-                                } else {
-                                    echo "<tr>
+                                }
+                            } else {
+                                echo "<tr>
                                         <td colspan='10' class='border border-gray-300 px-4 py-2 text-center text-gray-500'>No farmers found</td>
                                     </tr>";
-                                }
-                                ?>
-                            </tbody>
-                        </table>
+                            }
+                            ?>
+                        </tbody>
+                    </table>
                     </div>
                 </div>
             </div>
