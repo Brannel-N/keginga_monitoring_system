@@ -60,7 +60,7 @@
                         <a href="./index.php" class="border-b border-gray-200 p-2 hover:bg-white hover:text-black rounded-sm hover:border-none hover:shadow-lg">Home</a>
                         <a href="#about-us" class="border-b border-gray-200 p-2 hover:bg-white hover:text-black rounded-sm hover:border-none hover:shadow-lg">About Us</a>
                         <a href="#contacts" class="border-b border-gray-200 p-2 hover:bg-white hover:text-black rounded-sm hover:border-none hover:shadow-lg">Contacts</a>
-                        <a href="#getting-started" class="border-b border-gray-200 p-2 hover:bg-white hover:text-black rounded-sm hover:border-none hover:shadow-lg">Get Started</a>
+                        <a href="login.php" class="border-b border-gray-200 p-2 hover:bg-white hover:text-black rounded-sm hover:border-none hover:shadow-lg">Get Started</a>
                     </div>
                 </div>
                 <div class="hidden space-x-8 items-center justify-evenly font-semibold
@@ -68,7 +68,7 @@
                     <a href="./index.php" class="border-b border-gray-200 p-2 hover:bg-white hover:text-black rounded-sm hover:border-none hover:shadow-lg">Home</a>
                     <a href="#about-us" class="border-b border-gray-200 p-2 hover:bg-white hover:text-black rounded-sm hover:border-none hover:shadow-lg">About Us</a>
                     <a href="#contacts" class="border-b border-gray-200 p-2 hover:bg-white hover:text-black rounded-sm hover:border-none hover:shadow-lg">Contacts</a>
-                    <a href="#getting-started" class="bg-white border-b border-gray-200 py-2 hover:bg-green-500 text-green-500 hover:text-white rounded-full px-4 hover:border-none hover:shadow-lg">Get Started</a>
+                    <a href="login.php" class="bg-white border-b border-gray-200 py-2 hover:bg-green-500 text-green-500 hover:text-white rounded-full px-4 hover:border-none hover:shadow-lg">Get Started</a>
                 </div>
                 <button class="text-gray-500 w-10 h-10 relative focus:outline-none bg-white
                                 md:hidden
@@ -220,6 +220,6 @@
     </section>
     <!-- Footer section -->
     <?php include './include/footer.php'; ?>
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </body>
 </html>

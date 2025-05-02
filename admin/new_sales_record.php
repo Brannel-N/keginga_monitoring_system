@@ -76,14 +76,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $updateStmt->close();
             $stmt->close();
             // Redirect to sales records page
-            header("Location: ../new_sales_records.php?farmerId=$farmerId");
+            header("Location: ./new_sales_record.php?farmerId=$farmerId");
         } else {
             $errorMessage = "Failed to update farmer data. Please try again.";
         }
     } else {
         $errorMessage = "Failed to add sale record. Please try again.";
         echo "Error: {$stmt->error}";
-        header("Location: ../new_sales_record.php?farmerId=$farmerId");
+        header("Location: ./new_sales_record.php?farmerId=$farmerId");
     }
 }
 ?>

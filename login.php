@@ -75,4 +75,4 @@ if (isset($_GET['reset'])) {
     </div>
     </section>
 </body>
-</html>
+</html

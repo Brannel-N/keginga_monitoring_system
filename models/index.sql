@@ -48,3 +48,12 @@ CREATE TABLE IF NOT EXISTS payments (
 
 ALTER TABLE users 
 MODIFY COLUMN password VARCHAR(255) NULL;
+
+CREATE TABLE feedback (
+    id INT AUTO_INCREMENT PRIMARY KEY, 
+    name VARCHAR(255) NOT NULL,        
+    email VARCHAR(255) NOT NULL,       
+    message_type ENUM('complaint', 'compliment') NOT NULL, 
+    message TEXT NOT NULL,             
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+);
