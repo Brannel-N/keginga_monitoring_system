@@ -30,9 +30,14 @@
                             class="block px-4 py-2 hover:bg-green-700">Farmers</a>
                     </li>
                     <li>
-                        <a href="sales.php" @click="open = false" class="block px-4 py-2 hover:bg-green-700">Sales</a>
+                        <a href="sales.php" @click="open = false" class="block px-4 py-2 hover:bg-green-700">Deliveries</a>
                     </li>
                 <?php endif; ?>
+                <li>
+                    <a href="download_history.php" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 focus:outline-none">
+                        Download delivery History
+                    </a>
+                </li>
                 <li>
                     <a href="../processes/logout.php" @click="open = false"
                         class="block px-4 py-2 hover:bg-green-700">Logout</a>

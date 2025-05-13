@@ -25,7 +25,7 @@ if (isset($_GET['reset'])) {
 <body class="bg-green-600 ">
     <section class="flex items-center justify-center h-screen">
          <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 class="text-2xl font-bold text-center text-green-600">Welcome To Keginga Farmers App</h2>
+        <h2 class="text-2xl font-bold text-center text-green-600">Welcome To Keginga Tea Farmers Web-App</h2>
         <p class="text-gray-600 text-sm py-2 text-center mb-6">Please login to continue.</p>
 
         <?php if (!empty($error)): ?>            <p class="text-red-600 text-center mb-4"><?php echo htmlspecialchars($error); ?></p>

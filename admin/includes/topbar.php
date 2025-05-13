@@ -1,6 +1,6 @@
 <div class="w-full flex flex-col md:flex-row items-center gap-2 md:justify-between md:items-center p-4 text-green-600">
     <div class="text-lg uppercase md:capitalize font-bold">
-        Keginga Monitoring System
+        Keginga E-Record Monitoring System
     </div>
     <div class="flex items-center space-x-4">
         <a href="../processes/logout.php"

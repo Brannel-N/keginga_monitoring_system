@@ -131,10 +131,10 @@ $paymentRecords = $paymentStmt->get_result();
                     <div class="mb-6">
                        
                         <div class="flex-1 flex justify-between items-center mb-2">
-                            <h3 class="text-lg font-semibold mb-2">Tea Sale History</h3>
+                            <h3 class="text-lg font-semibold mb-2">Tea Delivery History</h3>
                             <a href="new_sales_record.php?farmerId=<?= $farmerId ?>"
                                 class="ml-4 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 focus:outline-none">
-                                Record Sale
+                                Record Delivery
                             </a>
                         </div>
                         <div class="space-y-4">
@@ -142,7 +142,7 @@ $paymentRecords = $paymentStmt->get_result();
                                 <div class="bg-white shadow rounded-lg p-4 flex justify-between items-center">
                                     <div>
                                         <p class="text-gray-600">Date: <span class="font-semibold"><?= $sale['date'] ?></span></p>
-                                        <p class="text-gray-600">Quantity Sold: <span class="font-semibold"><?= $sale['quantity'] ?> kg</span></p>
+                                        <p class="text-gray-600">Quantity Delivered: <span class="font-semibold"><?= $sale['quantity'] ?> kg</span></p>
                                         <p class="text-gray-600">Unit Rate: <span class="font-semibold">KES <?= number_format($sale['unitRate'], 2) ?></span></p>
                                         <p class="text-gray-600">Total Amount: <span class="font-semibold">KES <?= number_format($sale['totalAmount'], 2) ?></span></p>
                                     </div>

@@ -127,7 +127,7 @@ $paymentRecords = $paymentStmt->get_result();
                             <i class="fas fa-weight"></i>
                         </div>
                         <div>
-                            <h3 class="text-lg font-semibold">Total Quantity Sold</h3>
+                            <l class="text-lg font-semibold">Total Quantity Delivered</l>
                             <p class="text-2xl font-bold"><?= $farmerDetails['totalQtySold'] ?> kg</p>
                         </div>
                     </div>
@@ -161,16 +161,17 @@ $paymentRecords = $paymentStmt->get_result();
                 <div>
                     <h2 class="text-xl font-bold mb-4">Transaction History</h2>
 
+                    <!-- Filter Form -->
                     <!-- Tea Sale History -->
                     <div class="mb-6">
-                        <h3 class="text-lg font-semibold mb-2">Tea Sale History</h3>
+                        <h3 class="text-lg font-semibold mb-2">Tea Delivery History</h3>
                         <div class="space-y-4">
                             <?php while ($sale = $saleRecords->fetch_assoc()): ?>
                                 <div class="bg-white shadow rounded-lg p-4 flex justify-between items-center">
                                     <div>
                                         <p class="text-gray-600">Date: <span
                                                 class="font-semibold"><?= $sale['date'] ?></span></p>
-                                        <p class="text-gray-600">Quantity Sold: <span
+                                        <p class="text-gray-600">Quantity Delivered: <span
                                                 class="font-semibold"><?= $sale['quantity'] ?> kg</span></p>
                                         <p class="text-gray-600">Unit Rate: <span class="font-semibold">KES
                                                 <?= number_format($sale['unitRate'], 2) ?></span></p>
@@ -200,10 +201,9 @@ $paymentRecords = $paymentStmt->get_result();
                             <?php endwhile; ?>
                         </div>
                     </div>
-
                     <!-- Footer -->
                     <div class="text-white text-center p-4">
-                        <?php include 'includes/footer.php'; ?>
+                        <?php include '../admin/includes/footer.php'; ?>
                     </div>
                 </div>
             </div>

@@ -31,7 +31,7 @@ if (!$result) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Tea Sales</title>
+    <title>Admin - Tea Deliveries</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <!-- Tailwind CSS Scripts -->
@@ -52,8 +52,11 @@ if (!$result) {
             <div class="flex-1 p-2 md:p-6">
                 <!-- Sales Table -->
                 <div class="bg-white shadow rounded-lg p-6">
-                    <h2 class="text-xl font-bold mb-4">Sales History</h2>
-                    <div class="overflow-x-auto">
+                    <h2 class="text-xl font-bold mb-4">Delivery History</h2>
+                    <a href="download_sales.php" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 focus:outline-none">
+                        Download Delivery Data
+                    </a>
+                    <div class="overflow-x-auto mt-4">
                         <table class="min-w-full table-auto border-collapse border border-gray-200">
                             <thead>
                                 <tr class="bg-gray-100">

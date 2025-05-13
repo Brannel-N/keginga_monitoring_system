@@ -1,6 +1,26 @@
 <?php
-function send_text_message($to, $message)
+require_once "../config/db.php"; // Include database connection
+
+function send_text_message($farmerName, $message)
 {
+    global $conn; // Use the database connection from the included file
+
+    // Fetch farmer's ID and phone number from the database
+    $query = "SELECT userId, phoneNumber FROM users WHERE phoneNumber = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $farmerName);
+    $stmt->execute();
+    $stmt->bind_result($userId, $phoneNumber);
+
+    if ($stmt->fetch()) {
+        // Ensure phone number is in the correct format (+254)
+        $to = preg_replace('/^0/', '+254', $phoneNumber); // Converts 07xx to +2547xx
+    } else {
+        error_log("User with name {$farmerName} not found or has no phone number.");
+        return null;
+    }
+    $stmt->close();
+
     // Your Africa's Talking credentials
     $username = 'nelite'; // Replace with your Africa's Talking username
     $apiKey = 'atsk_92daec573ccd1cbb5d4091f96d5ad1567928799fa24dc86ec6072be729236b80d5c0304f'; // Replace with your Africa's Talking API key
@@ -56,10 +76,11 @@ function send_text_message($to, $message)
     return $result;
 }
 
-$to = '+254714573054';
+// Example usage
+$farmerName = 'John Doe'; // Replace with the actual farmer's name
 $message = 'Hello from our Keginga Farmers app!';
 
-$result = send_text_message($to, $message);
+$result = send_text_message($farmerName, $message);
 
 if ($result && isset($result['SMSMessageData']['Recipients'][0])) {
     $recipient = $result['SMSMessageData']['Recipients'][0];
@@ -74,3 +95,4 @@ if ($result && isset($result['SMSMessageData']['Recipients'][0])) {
 } else {
     echo "❌ Failed to send SMS. No valid response from the API.";
 }
+?>

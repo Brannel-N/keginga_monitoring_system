@@ -96,7 +96,7 @@ try {
                                 <i class="fas fa-users"></i>
                             </div>
                             <div class="ml-4">
-                                <h2 class="text-lg font-bold">Number of Farmers</h2>
+                                <h2 class="text-lg font-bold">Number of Farmers Registered</h2>
                                 <p class="text-gray-600 text-xl"><?php echo $totalFarmers; ?></p>
                             </div>
                         </div>
@@ -107,7 +107,7 @@ try {
                                 <i class="fas fa-leaf"></i>
                             </div>
                             <div class="ml-4">
-                                <h2 class="text-lg font-bold">Total Kilograms of Tea</h2>
+                                <h2 class="text-lg font-bold">Total Kilograms of Tea Leaves Delivered This Month</h2>
                                 <p class="text-gray-600 text-xl"><?php echo number_format($totalKilograms); ?> kg</p>
                             </div>
                         </div>
@@ -118,7 +118,7 @@ try {
                                 <i class="fas fa-exchange-alt"></i>
                             </div>
                             <div class="ml-4">
-                                <h2 class="text-lg font-bold">Total Transactions</h2>
+                                <h2 class="text-lg font-bold">Total Transactions Made This Month</h2>
                                 <p class="text-gray-600 text-xl"><?php echo $totalTransactions; ?></p>
                             </div>
                         </div>
@@ -126,13 +126,13 @@ try {
                 </div>
                 <!-- Recent Transactions Table -->
                 <div class="mt-8 bg-white shadow rounded-lg p-6">
-                    <h2 class="text-xl font-bold mb-4">Recent Tea Sale Transactions</h2>
+                    <h2 class="text-xl font-bold mb-4">Recent Tea Delivery Transactions</h2>
                     <table class="min-w-full table-auto border-collapse border border-gray-200">
                         <thead>
                             <tr class="bg-gray-100">
                                 <th class="border border-gray-300 px-4 py-2 text-left">Farmer Name</th>
                                 <th class="border border-gray-300 px-4 py-2 text-left">Date & Time</th>
-                                <th class="border border-gray-300 px-4 py-2 text-left">Kilograms Bought</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left">Kilograms Delivered</th>
                             </tr>
                         </thead>
                         <tbody>

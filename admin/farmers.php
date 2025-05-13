@@ -32,7 +32,7 @@ $stmt->close();
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head></head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Farmers</title>
@@ -86,9 +86,9 @@ $stmt->close();
                                 <th class="border border-gray-300 px-4 py-2 text-left">Email</th>
                                 <th class="border border-gray-300 px-4 py-2 text-left">Phone Number</th>
                                 <th class="border border-gray-300 px-4 py-2 text-left">Location</th>
-                                <th class="border border-gray-300 px-4 py-2 text-left">Total Qty Sold</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left">Total Qty Delivered</th>
                                 <th class="border border-gray-300 px-4 py-2 text-left">Outstanding Balance</th>
-                                <th class="border border-gray-300 px-4 py-2 text-left">Total Amount Earned</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left">Expected Amount to be Earned</th>
                                 <th class="border border-gray-300 px-4 py-2 text-left">Total Amount Paid</th>
                                 <th class="border border-gray-300 px-4 py-2 text-left">Actions</th>
                             </tr>
